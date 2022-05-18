@@ -1,3 +1,5 @@
+/* Inspiration from:https://www.youtube.com/watch?v=MtNpxdQ9DUo */
+
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +21,33 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: grab;
 }
+
+
+/** Full menu - Not compatible with drag **/
+
+
+/* 
+nav {
+    position: absolute;
+    top: 500px;
+    right: 10px;
+    width: 70px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: all 0.6s ease;
+}
+
+nav.open {
+    right: 120px;
+    top: 430px;
+}
+
+*/
 
 nav .nav-content {
     display: flex;
@@ -43,11 +71,25 @@ nav .nav-content {
 .nav-content .toggle-btn {
     font-size: 25px;
     color: #0e2431;
+    z-index: 100;
+    cursor: pointer;
+    transform: rotate(-225deg);
+    transition: all 0.6s ease;
+}
+
+nav.open .toggle-btn {
+    transform: rotate(0deg);
 }
 
 .nav-content span {
     position: absolute;
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+nav.open .nav-content span {
     transform: rotate(calc(var(--i) * (360deg / 8))) translateY(120px);
+    opacity: 1;
 }
 
 .nav-content span a {
@@ -59,4 +101,10 @@ nav .nav-content {
     font-size: 24px;
     color: #0e2431;
     transform: rotate(calc(var(--i) * (360deg / -8)));
+    opacity: 0.8;
+    transition: 0.2s;
+}
+
+.nav-content span a:hover i {
+    opacity: 1;
 }
