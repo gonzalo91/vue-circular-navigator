@@ -1,0 +1,23 @@
+{
+  "name": "vue-circular-navigator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonzalo91/vue-circular-navigator.git"
+  },
+  "keywords": [
+    "vue",
+    "vue-circular-navigator"
+  ],
+  "author": "Zalo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gonzalo91/vue-circular-navigator/issues"
+  },
+  "homepage": "https://github.com/gonzalo91/vue-circular-navigator#readme"
+}
