@@ -105,6 +105,10 @@ nav.open .nav-content span {
     transition: 0.2s;
 }
 
+.nav-content span a i.active {
+    color: #5f8e12
+}
+
 .nav-content span a:hover i {
     opacity: 1;
 }
