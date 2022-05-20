@@ -1,9 +1,9 @@
 
 <template>
-  <nav>      
+  <nav ref="nav" :style="{ top: localConf.top, right: localConf.right}">      
       <div class="nav-content">
-          <div class="toggle-btn">
-              <i class='bx bx-plus'></i>
+          <div class="toggle-btn" ref="toggleBtn">              
+              <i :class="[centralIcon]" :style="{color: localConf.iconDefaultColor}" ></i>
           </div>
           <span title="Primero" style="--i:5;">
               <a href="#">
@@ -39,56 +39,33 @@
 <script>
 import 'boxicons/css/boxicons.min.css';
 
+import defaultConf from './default.conf';
 import {initEvents} from './utils.js'
 export default /*#__PURE__*/{
   name: 'VueCircularNavigator', // vue component name
   data() {
     return {
-      
+        localConf: defaultConf,
     };
   },
+  props:['conf',],
   mounted() {
     const nav = this.$refs.nav;
     const toogleBtn = this.$refs.toggleBtn;
 
     initEvents(nav, toogleBtn);
 
-    nav.addEventListener('dblclick', () => {
-        console.log('dblclick');
-        nav.classList.toggle('open')
-    })
-
-    toogleBtn.addEventListener("click", () => {
-        nav.classList.toggle('open')
-    })
+    this.localConf = {
+        ...this.localConf,
+        ...this.conf,
+    }    
 
 
-
-    let onDrag = ({ movementY }) => {
-        const navStyle = window.getComputedStyle(nav),
-            navTop = parseInt(navStyle.top),
-            navHeight = parseInt(navStyle.height),
-            windHeight = window.innerHeight;
-
-        nav.style.top = navTop > 0 ? `${navTop + movementY}px` : "1px";
-        if (navStyle > windHeight - navHeight) {
-            nav.style.top = `${windHeight - navHeight}px`
-        }
-    }
-
-
-    nav.addEventListener("mousedown", () => {
-        console.log('mousedown');
-        nav.addEventListener("mousemove", onDrag, true)
-    })
-
-    nav.addEventListener("mouseup", () => {
-        console.log("mouseup");
-        nav.removeEventListener("mousemove", onDrag, true)
-    })
   },
   computed: {
-    
+    centralIcon(){
+        return this.localConf.centralIcon
+    }
   },
   methods: {
     
@@ -99,12 +76,10 @@ export default /*#__PURE__*/{
 <style scoped>
   /* Inspiration from:https://www.youtube.com/watch?v=MtNpxdQ9DUo */
 
-
-
 nav {
-    position: absolute;
-    top: 450px;
-    right: 0px;
+    position: fixed;
+    top: 60%;
+    right: 10px;
     width: 70px;
     height: 300px;
     display: flex;
