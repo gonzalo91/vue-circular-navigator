@@ -39,6 +39,7 @@
 <script>
 import 'boxicons/css/boxicons.min.css';
 
+import {initEvents} from './utils.js'
 export default /*#__PURE__*/{
   name: 'VueCircularNavigator', // vue component name
   data() {
@@ -47,9 +48,10 @@ export default /*#__PURE__*/{
     };
   },
   mounted() {
-    const nav = document.querySelector('nav'),
-    toogleBtn = document.querySelector(".toggle-btn")
+    const nav = this.$refs.nav;
+    const toogleBtn = this.$refs.toggleBtn;
 
+    initEvents(nav, toogleBtn);
 
     nav.addEventListener('dblclick', () => {
         console.log('dblclick');
