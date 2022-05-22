@@ -78,14 +78,13 @@ export default /*#__PURE__*/{
 
 nav {
     position: fixed;
-    top: 60%;
+    top: 65%;
     right: 10px;
     width: 70px;
     height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: grab;
 }
 
 

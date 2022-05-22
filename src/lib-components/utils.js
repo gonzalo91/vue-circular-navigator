@@ -18,6 +18,7 @@ const initEvents = (nav, toggleBtn) => {
         nav.classList.toggle('open')
     })
 
+    /*
     nav.addEventListener("mousedown", () => {
         console.log('mousedown');
         nav.addEventListener("mousemove", localDrag, true)
@@ -27,6 +28,7 @@ const initEvents = (nav, toggleBtn) => {
         console.log("mouseup");
         nav.removeEventListener("mousemove", localDrag, true)
     })
+    */
 }
 
 export { initEvents }
