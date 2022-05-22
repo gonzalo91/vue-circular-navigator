@@ -1,6 +1,6 @@
 export default {
 
-    top: '60%',
+    top: '55vh',
     right: '10px',
     iconDefaultColor: '#0e2431',
     iconActiveColor: '#5f8e12',
