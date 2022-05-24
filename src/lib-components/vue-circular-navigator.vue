@@ -2,35 +2,20 @@
 <template>
   <nav ref="nav" :style="{ top: localConf.top, right: localConf.right}">      
       <div class="nav-content">
-          <div class="toggle-btn" ref="toggleBtn">              
+          <div class="toggle-btn" @click="clickedCentral" >              
               <i :class="[centralIcon]" :style="{color: localConf.iconDefaultColor}" ></i>
           </div>
-          <span title="Primero" style="--i:5;">
-              <a href="#">
-                  <i class='bx bx-wifi active' ></i>                  
-              </a>
-          </span>
-          <span title="Segundo" style="--i:4;">
-              <a href="#">
-                  <i class='bx bx-plus-circle'></i>
-              </a>
-          </span>
-          <span title="Segundo" style="--i:3;">
-              <a href="#">
-                  <i class='bx bxs-arrow-from-left'></i>
-              </a>
-          </span>
-          <span title="Segundo" style="--i:2;">
-              <a href="#">
-                  <i class='bx bxs-arrow-from-left'></i>
+          <span @click.prevent="optionClicked(option)" 
+                v-for="(option, index) of options" 
+                :key="option.id"  
+                :title="option.title" 
+                :class="{'cursor-not-allowed': option.disabled, 'active': option.value}"
+                :style="{'--i':5 - index, }">
+              <a>                                    
+                  <i :class='option.icon' :style="{'color': colorIndicator(option) }" ></i>                  
               </a>
           </span>
 
-          <span title="Segundo" style="--i:1;">
-              <a href="#">
-                  <i class='bx bxs-arrow-from-left'></i>
-              </a>
-          </span>
           
       </div>
   </nav>
@@ -40,7 +25,7 @@
 import 'boxicons/css/boxicons.min.css';
 
 import defaultConf from './default.conf';
-import {initEvents} from './utils.js'
+import { SWITCH_TYPE} from './utils.js'
 export default /*#__PURE__*/{
   name: 'VueCircularNavigator', // vue component name
   data() {
@@ -48,19 +33,26 @@ export default /*#__PURE__*/{
         localConf: defaultConf,
     };
   },
-  props:['conf',],
+  props:['conf', 'options'],
+  emits: ['optionClicked'],
   mounted() {
-    const nav = this.$refs.nav;
-    const toogleBtn = this.$refs.toggleBtn;
-
-    initEvents(nav, toogleBtn);
-
+    
     this.localConf = {
         ...this.localConf,
         ...this.conf,
     }    
 
-
+  },
+  watch:{
+      conf: {
+        deep: true,
+        handler(){            
+            this.localConf = {
+                ...this.localConf,
+                ...this.conf,
+            }
+        }
+      },
   },
   computed: {
     centralIcon(){
@@ -68,7 +60,35 @@ export default /*#__PURE__*/{
     }
   },
   methods: {
-    
+    optionClicked(option){
+        if(option.disabled){
+            return;
+        }
+
+        if(option.type == SWITCH_TYPE){                        
+            option.value = ! option.value;
+        }
+
+        this.$emit('optionClicked', option);        
+    },
+    clickedCentral(){
+        this.$refs.nav.classList.toggle('open')
+    },
+    colorIndicator(option){
+        if(option.value == true){            
+            if(option.hasOwnProperty('iconActiveColor')){    
+                return  option.iconActiveColor + ' !important';
+            }
+
+            return this.localConf.iconActiveColor + ' !important';
+        }
+
+        if(option.hasOwnProperty('iconDefaultColor')){    
+                return  option.iconDefaultColor + ' !important';
+        }
+
+        return this.localConf.iconDefaultColor + ' !important';        
+    }
   },
 };
 </script>
