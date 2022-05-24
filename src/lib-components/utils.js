@@ -10,9 +10,6 @@ const initEvents = (nav, toggleBtn) => {
             nav.style.top = `${windHeight - navHeight}px`
         }
     }
-    nav.addEventListener('dblclick', () => {
-        nav.classList.toggle('open')
-    })
 
     toggleBtn.addEventListener("click", () => {
         nav.classList.toggle('open')
@@ -31,4 +28,7 @@ const initEvents = (nav, toggleBtn) => {
     */
 }
 
-export { initEvents }
+const ACTION_TYPE = 'type';
+const SWITCH_TYPE = 'switch'
+
+export { initEvents, ACTION_TYPE, SWITCH_TYPE }

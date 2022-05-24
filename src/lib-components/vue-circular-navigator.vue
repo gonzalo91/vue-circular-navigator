@@ -131,6 +131,15 @@ nav .nav-content {
     box-shadow: 0 0 20 rgba(0, 0, 0, 0.2);
 }
 
+
+.cursor-not-allowed{
+    cursor:not-allowed !important;
+}
+
+.nav-content span.cursor-not-allowed  a:hover i{
+    opacity: 0.8 !important;
+}
+
 .nav-content .toggle-btn {
     font-size: 25px;
     color: #0e2431;
@@ -148,6 +157,7 @@ nav.open .toggle-btn {
     position: absolute;
     transition: all 0.6s ease;
     opacity: 0;
+    cursor: pointer;
 }
 
 nav.open .nav-content span {
@@ -168,8 +178,8 @@ nav.open .nav-content span {
     transition: 0.2s;
 }
 
-.nav-content span a i.active {
-    color: #5f8e12
+.nav-content span.active a i{
+    color: #5f8e12;
 }
 
 .nav-content span a:hover i {
